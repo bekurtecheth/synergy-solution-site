@@ -251,7 +251,7 @@ export default function LandingPage() {
               <div className="text-sm font-black uppercase tracking-widest text-[#064e3b]">Rapid Growth</div>
             </div>
             <p className="text-sm text-slate-600 leading-relaxed">
-              Our clients see an average of 40% increase in operational efficiency within the first 6 months.
+              Our clients see an average of 50% increase in operational efficiency within the first 6 months.
             </p>
           </motion.div>
         </div>
