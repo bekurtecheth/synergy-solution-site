@@ -415,7 +415,7 @@ export default function LandingPage() {
                 {/* Image Container with explicit height for mobile fallback */}
                 <div className="relative w-full aspect-square rounded-[3rem] overflow-hidden shadow-2xl border-8 border-slate-50 bg-slate-100">
                   <Image 
-                    src="/images/biruk.jpeg"
+                    src="/images/biruk.jpg"
                     alt="Dr. Biruk Tessema"
                     fill
                     className="object-cover"
