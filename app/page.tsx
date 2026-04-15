@@ -645,7 +645,7 @@ export default function LandingPage() {
               </p>
               <div className="flex gap-6">
                 {[
-                  { icon: Linkedin, href: "#" },
+                  { icon: Linkedin, href: "https://www.linkedin.com/in/dr-biruk-tessema-23b1351b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" },
                   { icon: Twitter, href: "#" },
                   { icon: Youtube, href: "#" }
                 ].map((social, i) => (
