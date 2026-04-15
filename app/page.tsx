@@ -194,7 +194,7 @@ export default function LandingPage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
               </span>
-              Now Accepting New Clients for 2026
+              Now Accepting New Clients
             </div>
             <h1 className="text-6xl md:text-8xl font-display font-black text-[#064e3b] leading-[0.9] tracking-tighter mb-10">
               EXPERTISE <br />
@@ -322,7 +322,7 @@ export default function LandingPage() {
               title="Customized Training"
               category="Professional Development"
               duration="Tailored Programs"
-              image="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1000"
+              image="/images/peda.jpg"
               delay={0.1}
             />
             <TrainingCard 
