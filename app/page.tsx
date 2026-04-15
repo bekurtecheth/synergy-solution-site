@@ -329,14 +329,14 @@ export default function LandingPage() {
               title="Academic Support"
               category="Education"
               duration="Ongoing Mentorship"
-              image="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1000"
+              image="/images/peda.jpg"
               delay={0.2}
             />
             <TrainingCard 
               title="Strategic Communication"
               category="Soft Skills"
               duration="2 Weeks Workshop"
-              image="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=1000"
+              image="/images/peda.jpg"
               delay={0.3}
             />
           </div>
@@ -361,8 +361,8 @@ export default function LandingPage() {
             {[
               {
                 quote: "Synergy Solutions transformed our business plan into a winning strategy. Their research was impeccable.",
-                author: "Sarah Jenkins",
-                role: "CEO, TechFlow Systems"
+                author: "Alehegn Shiferaw",
+                role: "GM, Bekur Tech"
               },
               {
                 quote: "The training provided by Synergy for industry trainers significantly enhances the quality of cooperative training.",
@@ -371,8 +371,8 @@ export default function LandingPage() {
               },
               {
                 quote: "Their feasibility study was the cornerstone of our successful market expansion. Highly professional team.",
-                author: "Elena Rodriguez",
-                role: "Founder, GreenVenture"
+                author: "Jemal Hassen",
+                role: "Coordinater, GWPTC"
               }
             ].map((testimonial, i) => (
               <motion.div 
