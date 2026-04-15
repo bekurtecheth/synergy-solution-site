@@ -209,10 +209,17 @@ export default function LandingPage() {
                 Start Your Journey <ArrowRight className="w-5 h-5" />
               </button>
               <button className="group flex items-center gap-4 text-[#064e3b] font-black uppercase tracking-widest text-sm">
+              <a 
+                href="https://youtu.be/XGRtmefAY-0?si=PHOgcln2owpGQdYJ" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 text-[#064e3b] font-black uppercase tracking-widest text-sm"
+              >
                 <div className="w-14 h-14 rounded-full border-2 border-[#064e3b]/20 flex items-center justify-center group-hover:bg-[#064e3b] group-hover:text-white transition-all">
                   <Play className="w-5 h-5 fill-current" />
                 </div>
                 Watch Our Story
+                </a>
               </button>
             </div>
           </motion.div>
