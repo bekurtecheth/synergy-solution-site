@@ -365,9 +365,9 @@ export default function LandingPage() {
                 role: "CEO, TechFlow Systems"
               },
               {
-                quote: "The customized training programs provided by Synergy have significantly boosted our team's productivity.",
-                author: "Michael Chen",
-                role: "Operations Director, Global Logistics"
+                quote: "The training provided by Synergy for industry trainers significantly enhances the quality of cooperative training.",
+                author: "Sabahudin Hussein",
+                role: "Vice Dean, GWPTC"
               },
               {
                 quote: "Their feasibility study was the cornerstone of our successful market expansion. Highly professional team.",
@@ -686,18 +686,13 @@ export default function LandingPage() {
                 Addis Ababa, Ethiopia
               </p>
               <p className="text-sm text-white/70">
-                info@synergysolution.com
+                synergysolution@gmail.com
               </p>
             </div>
           </div>
 
           <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em]">
             <p>© 2026 Synergy Solution Global. All rights reserved.</p>
-            <div className="flex gap-10">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
-            </div>
           </div>
         </div>
       </footer>
