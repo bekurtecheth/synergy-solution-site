@@ -1,34 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  TrendingUp, 
-  Users, 
-  BookOpen, 
-  Briefcase, 
-  CheckCircle2, 
-  ArrowRight, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Menu, 
-  X,
-  ChevronRight,
-  Target,
-  Award,
-  BarChart3,
-  Globe,
-  Zap,
-  ShieldCheck,
-  Lightbulb,
-  ArrowUpRight,
-  Play,
-  Linkedin,
-  Twitter,
-  Youtube,
-  Send,
-  Clock
+  TrendingUp, Users, BookOpen, Briefcase, CheckCircle2, 
+  ArrowRight, Mail, Phone, MapPin, Menu, X, ChevronRight,
+  Target, Award, BarChart3, Globe, Zap, ShieldCheck,
+  Lightbulb, ArrowUpRight, Play, Linkedin, Twitter,
+  Youtube, Send, Clock
 } from 'lucide-react';
 import Image from 'next/image';
 
@@ -177,6 +156,51 @@ const TrainingCard = ({ title, category, duration, image, delay }: { title: stri
 );
 
 export default function LandingPage() {
+  // --- FORM LOGIC ADDED HERE (Outside of the return block) ---
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const [mounted, setMounted] = useState(false);
+  // Add this useEffect to detect when the browser is ready
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatusMessage("Sending...");
+
+    const formData = new FormData(e.currentTarget);
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
+       if (!accessKey) {
+    setStatusMessage("Configuration error: Please try again later.");
+    return;
+  }
+  if (accessKey) {
+    formData.append("access_key", accessKey);
+   }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatusMessage("Success! We'll get back to you shortly.");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatusMessage("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      setStatusMessage("Network error. Check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen selection:bg-[#064e3b] selection:text-white">
       <Navbar />
@@ -204,24 +228,31 @@ export default function LandingPage() {
             <p className="text-xl text-slate-600 leading-relaxed mb-12 max-w-xl">
               Synergy Solutions provides world-class business consulting, research, and professional training designed to optimize your operations and elevate your team&apos;s performance.
             </p>
-            <div className="flex flex-wrap gap-6">
-              <button className="bg-[#064e3b] hover:bg-[#064e3b]/90 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all flex items-center gap-3 shadow-2xl shadow-[#064e3b]/20">
-                Start Your Journey <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="group flex items-center gap-4 text-[#064e3b] font-black uppercase tracking-widest text-sm">
-              <a 
-                href="https://youtu.be/XGRtmefAY-0?si=PHOgcln2owpGQdYJ" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 text-[#064e3b] font-black uppercase tracking-widest text-sm"
-              >
-                <div className="w-14 h-14 rounded-full border-2 border-[#064e3b]/20 flex items-center justify-center group-hover:bg-[#064e3b] group-hover:text-white transition-all">
-                  <Play className="w-5 h-5 fill-current" />
-                </div>
-                Watch Our Story
-                </a>
-              </button>
-            </div>
+{/* Wrap the buttons in this {mounted && (...)} check */}
+<div className="flex flex-wrap gap-6">
+  {mounted && (
+    <>
+      <button 
+        type="button"
+        className="bg-[#064e3b] hover:bg-[#064e3b]/90 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-sm transition-all flex items-center gap-3 shadow-2xl shadow-[#064e3b]/20"
+      >
+        Start Your Journey <ArrowRight className="w-5 h-5" />
+      </button>
+
+      <a 
+        href="https://youtu.be/XGRtmefAY-0?si=PHOgcln2owpGQdYJ" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="group flex items-center gap-4 text-[#064e3b] font-black uppercase tracking-widest text-sm"
+      >
+        <div className="w-14 h-14 rounded-full border-2 border-[#064e3b]/20 flex items-center justify-center group-hover:bg-[#064e3b] group-hover:text-white transition-all">
+          <Play className="w-5 h-5 fill-current" />
+        </div>
+        Watch Our Story
+      </a>
+    </>
+  )}
+</div>
           </motion.div>
         </div>
 
@@ -587,11 +618,13 @@ export default function LandingPage() {
                 transition={{ duration: 0.6 }}
                 className="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl"
               >
-                <form className="space-y-8">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div className="space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-900 ml-1">Full Name</label>
                       <input 
+                        required
+                        name="name"
                         type="text" 
                         placeholder="John Doe"
                         className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-amber-500/20 transition-all text-slate-900 placeholder:text-slate-300" 
@@ -600,6 +633,8 @@ export default function LandingPage() {
                     <div className="space-y-3">
                       <label className="text-[10px] font-black uppercase tracking-widest text-slate-900 ml-1">Email Address</label>
                       <input 
+                        required
+                        name="email"
                         type="email" 
                         placeholder="john@example.com"
                         className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-amber-500/20 transition-all text-slate-900 placeholder:text-slate-300" 
@@ -608,23 +643,40 @@ export default function LandingPage() {
                   </div>
                   <div className="space-y-3">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-900 ml-1">Service Needed</label>
-                    <select className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-amber-500/20 transition-all text-slate-900 appearance-none">
-                      <option>Customized Training</option>
-                      <option>Business Consulting</option>
-                      <option>Business Research</option>
-                      <option>Feasibility Studies</option>
+                    <select 
+                      name="service" 
+                      className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-amber-500/20 transition-all text-slate-900 appearance-none"
+                    >
+                      <option value="Customized Training">Customized Training</option>
+                      <option value="Business Consulting">Business Consulting</option>
+                      <option value="Business Research">Business Research</option>
+                      <option value="Feasibility Studies">Feasibility Studies</option>
                     </select>
                   </div>
                   <div className="space-y-3">
                     <label className="text-[10px] font-black uppercase tracking-widest text-slate-900 ml-1">Message</label>
                     <textarea 
+                      required
+                      name="message"
                       rows={4} 
                       placeholder="Tell us about your project requirements..."
                       className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-amber-500/20 transition-all resize-none text-slate-900 placeholder:text-slate-300"
                     ></textarea>
                   </div>
-                  <button className="w-full bg-amber-500 text-white font-black uppercase tracking-widest py-5 rounded-2xl shadow-xl shadow-amber-500/20 hover:bg-amber-600 transition-all flex items-center justify-center gap-3">
-                    Send Message <Send className="w-5 h-5" />
+                  
+                  {/* Status Message */}
+                  {statusMessage && (
+                    <p className={`text-center text-xs font-bold ${statusMessage.includes("Success") ? "text-green-600" : "text-amber-600"}`}>
+                      {statusMessage}
+                    </p>
+                  )}
+
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="w-full bg-amber-500 text-white font-black uppercase tracking-widest py-5 rounded-2xl shadow-xl shadow-amber-500/20 hover:bg-amber-600 transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"} <Send className="w-5 h-5" />
                   </button>
                   <p className="text-[10px] text-center text-slate-400">
                     By submitting this form, you agree to our <a href="#" className="text-amber-600 underline">Privacy Policy</a>.
@@ -635,6 +687,7 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
       <footer className="bg-[#064e3b] text-white/50 py-24 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 mb-20">
